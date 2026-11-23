@@ -1,0 +1,400 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "02-学生模块",
+    "description": "",
+    "version": "1.0.0"
+  },
+  "tags": [],
+  "paths": {
+    "/api/student/my-records": {
+      "get": {
+        "summary": "获取我的面试记录",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "",
+            "required": false,
+            "example": "Bearer {{studwnt_b_token}}",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                },
+                "example": {
+                  "code": 200,
+                  "message": "操作成功",
+                  "data": [
+                    {
+                      "id": 2,
+                      "studentId": 11,
+                      "studentName": "李四",
+                      "companyId": 2,
+                      "companyName": "阿里巴巴",
+                      "position": "后端开发",
+                      "result": "PENDING_RESULT",
+                      "status": "APPROVED",
+                      "interviewRound": 1,
+                      "interviewType": "技术面",
+                      "isPublic": true,
+                      "creatorId": 11,
+                      "creatorName": "student_b",
+                      "interviewSessionId": "sess-002",
+                      "interviewerComment": "表达清晰",
+                      "teacherComment": "不错"
+                    }
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "post": {
+        "summary": "创建面试记录",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "",
+            "required": false,
+            "example": "Bearer {{student_a_token}}",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              },
+              "example": {
+                "companyId": 1,
+                "questionIds": [
+                  1,
+                  2
+                ],
+                "interviewDate": "2026-08-08 10:00:00",
+                "position": "Java开发",
+                "result": "PASS",
+                "interviewerComment": "评语",
+                "examPoints": "重点",
+                "isPublic": false,
+                "status": "APPROVED",
+                "salaryRange": "15K-25K",
+                "interviewRound": 1,
+                "interviewType": "技术面",
+                "hrContact": "HR小王",
+                "workLocation": "深圳"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                },
+                "example": {
+                  "code": 200,
+                  "message": "录入成功，该记录仅自己可见",
+                  "data": {
+                    "id": 3,
+                    "studentId": 10,
+                    "studentName": "张三",
+                    "companyId": null,
+                    "companyName": null,
+                    "position": null,
+                    "result": "PENDING_RESULT",
+                    "status": "PENDING",
+                    "interviewRound": 1,
+                    "interviewType": null,
+                    "isPublic": false,
+                    "creatorId": 10,
+                    "creatorName": "student_a",
+                    "interviewSessionId": "a70dba77-7063-457b-ae30-ac618e2651b7",
+                    "interviewerComment": null,
+                    "teacherComment": null
+                  }
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/student/favorites/{recordId}": {
+      "post": {
+        "summary": "收藏面试记录",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "recordId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "example": "1",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "",
+            "required": false,
+            "example": "Bearer {{studwnt_b_token}}",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "null"
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "message",
+                    "data"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/student/questions": {
+      "get": {
+        "summary": "获取面试题目",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "example": "0",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "example": "10",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                },
+                "example": {
+                  "code": 200,
+                  "message": "操作成功",
+                  "data": [
+                    {
+                      "id": 1,
+                      "title": "Java中HashMap的实现原理",
+                      "content": "请简述Java中HashMap的底层实现原理",
+                      "difficulty": "MEDIUM",
+                      "category": "Java基础",
+                      "tags": "集合,HashMap,数据结构",
+                      "referenceAnswer": "HashMap基于数组+链表+红黑树实现...",
+                      "creatorName": "admin"
+                    },
+                    {
+                      "id": 2,
+                      "title": "Spring Boot自动配置原理",
+                      "content": "请简述Spring Boot的自动配置原理",
+                      "difficulty": "MEDIUM",
+                      "category": "Java基础",
+                      "tags": "Spring,自动配置",
+                      "referenceAnswer": "Spring Boot通过@EnableAutoConfiguration...",
+                      "creatorName": "admin"
+                    },
+                    {
+                      "id": 3,
+                      "title": "MySQL索引失效的场景",
+                      "content": "列举MySQL索引失效的常见场景",
+                      "difficulty": "HARD",
+                      "category": "数据库",
+                      "tags": "MySQL,索引",
+                      "referenceAnswer": "隐式类型转换、使用函数、like前导%...",
+                      "creatorName": "admin"
+                    },
+                    {
+                      "id": 4,
+                      "title": "TCP三次握手过程",
+                      "content": "描述TCP三次握手的流程",
+                      "difficulty": "EASY",
+                      "category": "计算机网络",
+                      "tags": "TCP,网络",
+                      "referenceAnswer": "SYN -> SYN+ACK -> ACK",
+                      "creatorName": "admin"
+                    }
+                  ],
+                  "total": 4,
+                  "page": 0,
+                  "size": 10
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/student/submit-review": {
+      "post": {
+        "summary": "学生提交审核",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "",
+            "required": false,
+            "example": "Bearer {{student_a_token}}",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              },
+              "example": {
+                "companyId": 1,
+                "position": "Java开发",
+                "interviewDate": "2026-08-08 10:00:00"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {},
+    "responses": {},
+    "securitySchemes": {
+      "bearer": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "http://127.0.0.1:8080",
+      "description": "测试环境"
+    }
+  ],
+  "security": [
+    {
+      "bearer": []
+    }
+  ]
+}

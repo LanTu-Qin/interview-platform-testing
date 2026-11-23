@@ -1,0 +1,86 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "01-认证模块",
+    "description": "",
+    "version": "1.0.0"
+  },
+  "tags": [],
+  "paths": {
+    "/api/auth/login": {
+      "post": {
+        "summary": "登录",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "type": "string",
+                    "description": "用户名"
+                  },
+                  "password": {
+                    "type": "string",
+                    "description": "密码"
+                  }
+                },
+                "required": [
+                  "username",
+                  "password"
+                ]
+              },
+              "example": {
+                "username": "admin",
+                "password": "123456"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                },
+                "example": {
+                  "code": 200,
+                  "message": "登录成功",
+                  "data": {
+                    "token": "eyJzdWIiOiAiYWRtaW4iLCAicm9sZSI6ICJURUFDSEVSIiwgInVzZXJJZCI6IDEsICJpYXQiOiAxNzkzODYwMjcyLCAiZXhwIjogMTc5Mzg2Mzg3Mn0.signature",
+                    "username": "admin",
+                    "name": "管理员",
+                    "role": "TEACHER",
+                    "userId": 1
+                  }
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    }
+  },
+  "components": {
+    "schemas": {},
+    "responses": {},
+    "securitySchemes": {}
+  },
+  "servers": [
+    {
+      "url": "http://127.0.0.1:8080",
+      "description": "测试环境"
+    }
+  ],
+  "security": []
+}
